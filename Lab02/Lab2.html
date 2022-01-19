@@ -3,7 +3,8 @@
   <head>
     <title>Lab 2</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Qing Zhang" />
+    <meta name="author" content="Wei Li, modified from slides from Qing Zhang" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
   </head>
@@ -13,8 +14,8 @@ class: center, middle, inverse, title-slide
 
 # Lab 2
 ## Introductory Computing -2
-### Qing Zhang
-### Updated: 2020-02-06
+### Wei Li, modified from slides from Qing Zhang
+### Updated: 2021-12-30
 
 ---
 
@@ -23,8 +24,8 @@ class: center, middle, inverse, title-slide
 # This week:
 ## Introductory Computing 2
 
-- Odyssey Intro
-- Odyssey Demo
+- Pegasus Intro
+- Pegasus Demo
   - Login
   - File transfer
   - Navigation, HW7
@@ -36,25 +37,25 @@ class: center, middle, inverse, title-slide
 
 
 ---
-# Odyssey
+# Pegasus
 
-- What is Odyssey? Lots of computers stringed together
+- What is Pegasus? Lots of computers stringed together
 - Advantage: More storage, can run many things in parallel (e.g. use 10 computers to process 10 samples at a time)
 - Disadvantage: a lot of overhead to get things to work (have to make sure your stuff doesn't interfere with other people's stuff)
-- Can't just run stuff through the terminal on Odyssey, you will need to submit job using srun or sbatch (preferred)
+- Can't just run stuff through the terminal on Pegasus, you will need to submit job using srun or sbatch (preferred)
 - My tip: start off by requesting very few resources and doing a test run on a small file.
 - **START EARLY**. You might have to wait a long time for your jobs to run.
-- Odyssey might also be slow if everyone in the class tries at
+- Pegasus might also be slow if everyone in the class tries at
 the last minute.
 
 ---
-## Odyssey Logistics
+## Pegasus Logistics
 
 - Login using ssh (Mac/Linux) or PuTTY (Windows)
 - Need both your password and 6-digit code, either on your phone or
 as a Java applet on your computer.
 - Transfer files using Filezilla or WinSCP.
-- Details: [https://www.rc.fas.harvard.edu/resources/odyssey-quickstart-guide/](https://www.rc.fas.harvard.edu/resources/odyssey-quickstart-guide/)
+- Details: [https://colonialone.gwu.edu/pegasus/](https://colonialone.gwu.edu/pegasus/)
 
 
 ---
@@ -76,19 +77,21 @@ as a Java applet on your computer.
 
 ---
 
-# Odyssey Commands
+# Pegasus Commands
 
-Odyssey uses **slurm** workload manager.
+Pegasus uses **slurm** workload manager.
 
 - Submit a batch serial job: 	`sbatch runscript.sh`
-- Run a script or application interactively: `srun --pty -p test -t 10 --mem 1000 /bin/bash [script or app]`
-- Start interactive session: `srun --pty -p test -t 10 --mem 1000 /bin/bash`
+- Run a script or application interactively: `srun --pty -p tiny -t 10 --mem 1000 /bin/bash [script or app]`
+- Start interactive session: `srun --pty -p tiny -t 10 --mem 1000 /bin/bash`
 - Kill a job: `scancel 999999`
 - View status of your jobs :`squeue -u username`
 - Check current job by id number: `sacct -j 999999`
 
 
-- Can check job status online, too: [https://portal.rc.fas.harvard.edu/login/?next=/jobs/](https://portal.rc.fas.harvard.edu/login/?next=/jobs/)
+- `squeue`: Check job status
+
+- `sinfo`: Check allocations
 
 
 
@@ -109,13 +112,13 @@ Sublime or TextEdit)
 #SBATCH -n 1 # Number of cores requested
 #SBATCH -N 1 # Ensure that all cores are on one machine
 #SBATCH -t 15 # Runtime in minutes
-#SBATCH -p serial_requeue # Partition to submit to
+#SBATCH -p short # Partition to submit to
 #SBATCH --mem=1G # Memory in GB (see also --mem-per-cpu)
 #SBATCH -o output_%j.out # Standard out goes to this file
 #SBATCH -e error_%j.err # Standard err goes to this file
 
 # LOAD_MODULES
-module load bwa/0.7.15-fasrc02
+module load bwa
 
 
 # YOUR_COMMANDS_HERE
@@ -136,19 +139,19 @@ meaningful.
 - Need to load modules for the tools we want to use.
 - Modules for BWA:
 ``` 
-module load bwa/0.7.15-fasrc02
-module load samtools/1.5-fasrc02
+module load bwa
+module load samtools
 ```
 - Modules for STAR:
 ```
-module load STAR/2.6.0c-fasrc01
+module load star
 ```
-- Module search: [https://portal.rc.fas.harvard.edu/p3/build-reports/](https://portal.rc.fas.harvard.edu/p3/build-reports/)
+- Module search: `module avail`
 
 
 ---
 
-# Odyssey Demo
+# Pegasus Demo
 
 
 ---
@@ -173,7 +176,7 @@ module load STAR/2.6.0c-fasrc01
 
 ---
 - How to run (basic):
-    - Replace `ref.fasta` and `read1.fastq` with the path on Odyssey.
+    - Replace `ref.fasta` and `read1.fastq` with the path on Pegasus.
 
 
 ```bash
@@ -247,7 +250,7 @@ choose? Why?
 - Read file and save the colunm as a list
 
 ```
-with open('/n/stat115/2020/HW1/public_MC3.maf') as f:
+with open('/public_MC3.maf') as f:
     lines = [line.rstrip().split('\t')[2] for line in f]
 ```
 
@@ -322,10 +325,11 @@ the maximum sum up to position `\(i + 1\)`?
 # Finally...
 
 - Please do not make your homework public on Github.
-- Office Hour: Friday 4:30-5:30 PM HSPH Kresge Cafe
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/remark/0.14.0/remark.min.js"></script>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
@@ -370,6 +374,32 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
 // adds .remark-code-has-line-highlighted class to <pre> parent elements
 // of code chunks containing highlighted lines with class .remark-code-line-highlighted
 (function(d) {
@@ -387,17 +417,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-
-<script>
-(function() {
-  var links = document.getElementsByTagName('a');
-  for (var i = 0; i < links.length; i++) {
-    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
-      links[i].target = '_blank';
-    }
-  }
-})();
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {

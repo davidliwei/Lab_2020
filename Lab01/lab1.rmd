@@ -39,7 +39,7 @@ output:
 - Math
 - Variable
 - Conditional
-- Sign up for GWU Pegasus
+- Sign up for GWU Pegasus/Cereberus
 ]
 
 
@@ -69,7 +69,7 @@ This is an R Markdown document that I have output to an HTML presentation. Markd
 
 Each homework will be completed in this format and you will submit both the markdown document with code (.Rmd) and the compiled document (.html). **You only need to submit html for HW1**. With this format all necessary code (including python/bash code!) may be included in one source and the graders may easily reproduce your results.
 
-Homework files will be provided in several sources depending on thir type/size. Blackboard will contain the problem sets and you will submit your completed homework here. GitHub will also contain the problem sets as well as necessary (small) datasets, etc. The Pegasus cluster will contain larger datafiles (/CHILDRENS/groups/ligrp/GENO8232/) and will be necessary for high performance computing later in the semester.
+Homework files will be provided in several sources depending on thir type/size. Blackboard will contain the problem sets and you will submit your completed homework here. GitHub will also contain the problem sets as well as necessary (small) datasets, etc. The Pegasus/Cerberus cluster will contain larger datafiles (/CHILDRENS/groups/ligrp/GENO8232/) and will be necessary for high performance computing later in the semester.
 
 First, let's get R/RStudio downloaded!
 [Download R](https://www.r-project.org/) and [Rstudio](https://rstudio.com/products/rstudio/)
@@ -858,7 +858,7 @@ Material for bash scripting is adapted from:
 
 ---
 
-# Please signup for Pegasus!
+# Please signup for Pegasus/Cerberus!
 
 Thanks for all your questions.
 
