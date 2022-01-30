@@ -286,7 +286,7 @@ DimPlot(object = pbmc, reduction = 'umap')
 You can save the object at this point so that it can easily be loaded back in without having to rerun the computationally intensive steps performed above, or easily shared with collaborators.
 
 ```{r saveobject, eval=FALSE}
-saveRDS(pbmc, file = "../output/pbmc_tutorial.rds")
+saveRDS(pbmc, file = "pbmc_tutorial.rds")
 ```
 
 ***
@@ -306,7 +306,7 @@ cluster5.markers <- FindMarkers(object = pbmc, ident.1 = 5, ident.2 = c(0, 3), m
 head(x = cluster5.markers, n = 5)
 # find markers for every cluster compared to all remaining cells, report only the positive ones
 pbmc.markers <- FindAllMarkers(object = pbmc, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
-pbmc.markers %>% group_by(cluster) %>% top_n(n = 2, wt = avg_logFC)
+pbmc.markers %>% group_by(cluster) %>% top_n(n = 2, wt = avg_log2FC)
 ```
 
 Seurat has several tests for differential expression which can be set with the test.use parameter (see our [DE vignette](http://satijalab01.nygenome.org/seurat/v3.0/de_vignette.html) for details). For example, the ROC test returns the 'classification power' for any individual marker (ranging from 0 - random, to 1 - perfect).
@@ -327,7 +327,7 @@ FeaturePlot(object = pbmc, features = c("MS4A1", "GNLY", "CD3E", "CD14", "FCER1A
 `DoHeatmap` generates an expression heatmap for given cells and features. In this case, we are plotting the top 20 markers (or all markers if less than 20) for each cluster.
 
 ```{r clusterHeatmap, fig.height=8, fig.width=15}
-pbmc.markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_logFC) -> top10
+pbmc.markers %>% group_by(cluster) %>% top_n(n = 10, wt = avg_log2FC) -> top10
 DoHeatmap(object = pbmc, features = top10$gene) + NoLegend()
 ```
 
